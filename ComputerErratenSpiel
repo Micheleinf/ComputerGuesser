@@ -20,68 +20,87 @@ namespace Kleine_Programm
 
             //Deklariungen der variablen
             int untergrenze, obergrenze, computerRaten, anzahlversuche = 1;
+            string benu;
             char eingabe;
             Random zufall = new Random();
-            bool start = false;
-            
-            
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Was ist das minimum ? ");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            untergrenze = Convert.ToInt32(Console.ReadLine());
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Was ist das maximum ?");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            obergrenze = Convert.ToInt32(Console.ReadLine());
-            computerRaten = 50;
-            Console.ForegroundColor = ConsoleColor.Red;
-            
-            Console.Write("---------Clearing Console und Startet Game------------");
-            System.Threading.Thread.Sleep(2000);
-            Console.Clear();
+            bool start = true;
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("-----------------------------------------------");
-            Console.WriteLine("Bitte geben sie nach jedem versuch R,G oder K");
-            Console.WriteLine("R die Zahl richtig ist");
-            Console.WriteLine("G die gesuchte Zahl grösser ist");
-            Console.WriteLine("K die gesuchte Zahl kleiner ist");
-            Console.WriteLine("-----------------------------------------------");
-            
-            do
+            while (start == true)
             {
-                if (start == false)
-                    computerRaten = zufall.Next(untergrenze, obergrenze + 1);   
-                else
-                    computerRaten = zufall.Next(untergrenze, obergrenze);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Was ist das minimum ? ");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                untergrenze = Convert.ToInt32(Console.ReadLine());
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Was ist das maximum ?");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                obergrenze = Convert.ToInt32(Console.ReadLine());
+                computerRaten = 50;
+                Console.ForegroundColor = ConsoleColor.Red;
+
+                Console.Write("---------Clearing Console und Startet Game------------");
+                System.Threading.Thread.Sleep(2000);
+                Console.Clear();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("-----------------------------------------------");
+                Console.WriteLine("Bitte geben sie nach jedem versuch R,G oder K");
+                Console.WriteLine("R die Zahl richtig ist");
+                Console.WriteLine("G die gesuchte Zahl grösser ist");
+                Console.WriteLine("K die gesuchte Zahl kleiner ist");
+                Console.WriteLine("-----------------------------------------------");
+
+                do
+                {
+                    if (start == false)
+                        computerRaten = zufall.Next(untergrenze, obergrenze + 1);
+                    else
+                        computerRaten = zufall.Next(untergrenze, obergrenze);
 
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine(Convert.ToInt32(anzahlversuche) + " Versuch: " + Convert.ToInt32(computerRaten));
                     Console.ForegroundColor = ConsoleColor.Green;
                     eingabe = Convert.ToChar((Console.ReadLine()));
 
-                if (eingabe == 'k' || eingabe == 'K')
+                    if (eingabe == 'k' || eingabe == 'K')
+                    {
+                        obergrenze = computerRaten;
+                        start = true;
+                    }
+
+                    else if (eingabe == 'g' || eingabe == 'G')
+                        untergrenze = computerRaten;
+                    anzahlversuche++;
+                }
+                while (eingabe != 'r' && eingabe != 'R');
+
+                anzahlversuche = anzahlversuche - 1;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Die gesuchte Zahl ist " + computerRaten + "!");
+                Console.WriteLine("Ich brauchte dafür " + anzahlversuche + " Versuche");
+                Console.WriteLine("Wollen sie nochmal Spiele ?");
+                benu = Console.ReadLine();
+
+                if (benu == "ja" || benu == "Ja")
                 {
-                    obergrenze = computerRaten;             
                     start = true;
+
                 }
 
-                else if (eingabe == 'g' || eingabe == 'G')
-                    untergrenze = computerRaten;            
-                    anzahlversuche++;
+                else
+                {
+                    start = false;
+
+                }
+
+
+
+
+
+
+
+
             }
-            while (eingabe != 'r' && eingabe != 'R');
-
-            anzahlversuche = anzahlversuche -1;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Die gesuchte Zahl ist " + computerRaten  + "!");
-            Console.WriteLine("Ich brauchte dafür " + anzahlversuche + " Versuche");
-            
-
-
-
-
-
         }
     }
-}
+ }
