@@ -27,6 +27,7 @@ namespace Kleine_Programm
 
             while (start == true)
             {
+                //Bestimmung von der minimum Zahl bis zur Maximum Zahl, je nachdem was man für eine Zahl auswählt
                 anzahlversuche = 1;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Was ist das minimum ? ");
@@ -43,6 +44,7 @@ namespace Kleine_Programm
                 System.Threading.Thread.Sleep(2000);
                 Console.Clear();
 
+                //Erklärung wie man das Spiel Spielt
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("-----------------------------------------------");
                 Console.WriteLine("Bitte geben sie nach jedem versuch R,G oder K");
@@ -53,6 +55,7 @@ namespace Kleine_Programm
 
                 do
                 {
+                    //Random einschränkungen jenachdem was der Benutzer eingibt, Computer fängt mit einer Random Zahl an
                     if (start == false)
                         computerRaten = zufall.Next(untergrenze, obergrenze + 1);
                     else
@@ -63,25 +66,31 @@ namespace Kleine_Programm
                     Console.ForegroundColor = ConsoleColor.Green;
                     eingabe = Convert.ToChar((Console.ReadLine()));
 
+                    //Einschränkung Kleiner
                     if (eingabe == 'k' || eingabe == 'K')
                     {
                         obergrenze = computerRaten;
                         start = true;
                     }
-
+                   
+                    //Einschränkung Grösser
                     else if (eingabe == 'g' || eingabe == 'G')
                         untergrenze = computerRaten;
                     anzahlversuche++;
                 }
+
+                //Falls es Richtig geraten wurde geht es hier aus der do schlaufe raus
                 while (eingabe != 'r' && eingabe != 'R');
 
-                anzahlversuche = anzahlversuche - 1;
+                //Infos an den Nuzter über den Durchlauf
+                anzahlversuche = anzahlversuche  -1;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Die gesuchte Zahl ist " + computerRaten + "!");
                 Console.WriteLine("Ich brauchte dafür " + anzahlversuche + " Versuche");
                 Console.WriteLine("Wollen sie nochmal Spiele ?");
                 benu = Console.ReadLine();
 
+                //Hier kann der Nutzer auswählen ob er nochmal spielen möchte
                 if (benu == "ja" || benu == "Ja")
                 {
                     start = true;
@@ -104,4 +113,4 @@ namespace Kleine_Programm
             }
         }
     }
- }
+}
