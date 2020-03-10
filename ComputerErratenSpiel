@@ -27,6 +27,7 @@ namespace Kleine_Programm
 
             while (start == true)
             {
+                anzahlversuche = 1;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("Was ist das minimum ? ");
                 Console.ForegroundColor = ConsoleColor.Blue;
